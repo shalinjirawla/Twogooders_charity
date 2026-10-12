@@ -185,10 +185,19 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex min-h-80 items-center justify-center rounded-3xl border-2 border-dashed border-ink/20 bg-sand/50">
-              <p className="font-bold tracking-widest text-ink/60">
-                PHOTO OF TAMER
-              </p>
+            {/* PHOTO OF TAMER */}
+            <div className="relative min-h-96 lg:mr-4 lg:mb-4">
+              <div
+                aria-hidden
+                className="absolute -right-4 -bottom-4 h-full w-full rounded-3xl bg-sun/70"
+              />
+              <Image
+                src="/Tamer_patient.png"
+                alt="Photo of Tamer"
+                fill
+                sizes="(min-width: 1024px) 600px, 100vw"
+                className="rounded-3xl object-cover object-[50%_20%] shadow-2xl"
+              />
             </div>
           </div>
         </div>

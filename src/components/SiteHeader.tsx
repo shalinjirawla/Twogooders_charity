@@ -179,6 +179,35 @@ export function SiteHeader() {
               </span>
               Active Medical Fundraiser
             </span>
+
+            {/* Meet Tamer */}
+            <div className="flex items-center gap-4 rounded-full bg-cream/70 py-2 pr-7 pl-2 shadow-[0_15px_35px_-15px_rgba(43,43,43,0.45)] ring-1 ring-white/60 backdrop-blur-sm">
+              <div className="relative shrink-0">
+                <div className="rounded-full bg-gradient-to-br from-gold via-sun to-ink/70 p-[3px]">
+                  <div className="relative size-20 overflow-hidden rounded-full border-[3px] border-cream sm:size-24">
+                    <Image
+                      src="/Tamer_patient.png"
+                      alt="Tamer"
+                      fill
+                      sizes="96px"
+                      className="origin-[44%_32%] scale-[2.3] object-cover"
+                    />
+                  </div>
+                </div>
+                <span className="absolute -right-0.5 -bottom-0.5 grid size-8 place-items-center rounded-full border-[3px] border-cream bg-ink text-sun">
+                  <Icon name="heart" className="size-3.5" />
+                </span>
+              </div>
+              <div className="text-left">
+                <p className="text-xs font-bold tracking-[0.2em] text-gold uppercase">
+                  Meet Tamer
+                </p>
+                <p className="font-serif text-xl font-bold sm:text-2xl">
+                  Husband, Dad &amp; Fighter
+                </p>
+              </div>
+            </div>
+
             <h1 className="font-serif text-4xl leading-[1.1] font-bold text-ink sm:text-6xl lg:text-7xl">
               Stand With Tamer &amp; His Family
             </h1>
