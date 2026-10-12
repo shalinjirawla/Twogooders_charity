@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "It’s Tamer Time!",
+  title: "TG_tamer",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

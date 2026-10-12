@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SiteHeader } from "@/components/SiteHeader";
 
 const container = "mx-auto w-full max-w-7xl px-5 sm:px-8";
 
@@ -89,6 +90,8 @@ function Tick({
 
 export default function Home() {
   return (
+    <>
+    <SiteHeader />
     <main className="overflow-x-hidden text-lg">
       {/* ---------- Family update ---------- */}
       <section className="relative bg-gradient-to-b from-sand/70 to-cream">
@@ -155,7 +158,7 @@ export default function Home() {
       </section>
 
       {/* ---------- What's going on ---------- */}
-      <section className="py-20 sm:py-28">
+      <section id="updates" className="py-20 sm:py-28">
         <div className={container}>
           <div className="text-center">
             <Heading>WHAT’S GOING ON WITH TAM &amp; THE FAM</Heading>
@@ -217,7 +220,7 @@ export default function Home() {
       {/* ---------- Join + Wish list ---------- */}
       <section className="py-20 sm:py-28">
         <div className={`${container} grid items-start gap-8 lg:grid-cols-2`}>
-          <div className={card}>
+          <div id="join" className={card}>
             <Heading className="text-2xl sm:text-3xl">
               IT TAKES A VILLAGE TO BEAT CANCER - JOIN TEAM TAMER
             </Heading>
@@ -245,7 +248,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className={`${card} bg-gradient-to-br from-white to-sand/50`}>
+          <div id="wish-list" className={`${card} bg-gradient-to-br from-white to-sand/50`}>
             <Heading className="text-2xl sm:text-3xl">WISH LIST</Heading>
             <Accent />
             <p className="mt-6 font-bold text-ink/80">
@@ -312,7 +315,7 @@ export default function Home() {
       {/* ---------- Messages + Financial ---------- */}
       <section className="bg-sand/60 py-20 sm:py-28">
         <div className={`${container} grid items-start gap-8 lg:grid-cols-2`}>
-          <div className={`${card} flex flex-col`}>
+          <div id="messages" className={`${card} flex flex-col`}>
             <Heading className="text-2xl sm:text-3xl">
               MESSAGES TO TAMER &amp; THE FAM
             </Heading>
@@ -330,7 +333,7 @@ export default function Home() {
             </button>
           </div>
 
-          <div className={`${card} flex flex-col`}>
+          <div id="donate" className={`${card} flex flex-col`}>
             <Heading className="text-2xl sm:text-3xl">
               FINANCIAL ASSISTANCE
             </Heading>
@@ -385,5 +388,6 @@ export default function Home() {
         </div>
       </footer>
     </main>
+    </>
   );
 }
