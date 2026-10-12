@@ -180,15 +180,7 @@ export function SiteHeader() {
               Active Medical Fundraiser
             </span>
             <h1 className="font-serif text-4xl leading-[1.1] font-bold text-ink sm:text-6xl lg:text-7xl">
-              Stand With{" "}
-              <span className="relative whitespace-nowrap">
-                <span className="relative z-10">Tamer</span>
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 -bottom-1 z-0 h-2 rounded-full bg-cream sm:-bottom-1.5 sm:h-2.5"
-                />
-              </span>{" "}
-              &amp; His Family
+              Stand With Tamer &amp; His Family
             </h1>
             <p className="max-w-xl text-lg leading-relaxed text-ink/85 sm:text-xl">
               Tamer is fighting Stage 4 cancer. Your prayers, meals, errands and
