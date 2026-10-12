@@ -190,7 +190,7 @@ export function SiteHeader() {
                       alt="Tamer"
                       fill
                       sizes="96px"
-                      className="origin-[44%_32%] scale-[2.3] object-cover"
+                      className="object-cover"
                     />
                   </div>
                 </div>
