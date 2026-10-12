@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  /* Two Gooders palette */
+  --color-cream: #fcfaf6;
+  --color-sand: #f3ece3;
+  --color-sun: #dcb68e;
+  --color-gold: #c39a6b;
+  --color-ink: #2b2b2b;
+  --color-muted: #6b6b6b;
+  --font-sans: var(--font-lato), system-ui, sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
