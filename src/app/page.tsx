@@ -1,5 +1,20 @@
 import Image from "next/image";
 import { SiteHeader } from "@/components/SiteHeader";
+import { updates, wishes, donors, type Update } from "@/data/teamTamer";
+
+// Newest update leads; the rest roll into "Up until now"
+const [latestUpdate, ...previousUpdates] = updates;
+
+function UpdateEntry({ update }: { update: Update }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <p className="w-fit rounded-full bg-sand px-3 py-1 text-sm font-bold tracking-wider text-ink/80">
+        {update.date}
+      </p>
+      <p className="leading-relaxed whitespace-pre-line text-ink/90">{update.text}</p>
+    </div>
+  );
+}
 
 const container = "mx-auto w-full max-w-7xl px-5 sm:px-8";
 
@@ -33,14 +48,6 @@ function Accent({ center = false }: { center?: boolean }) {
     <span
       aria-hidden
       className={`mt-4 block h-1 w-16 rounded-full bg-sun ${center ? "mx-auto" : ""}`}
-    />
-  );
-}
-
-function Box({ className = "" }: { className?: string }) {
-  return (
-    <div
-      className={`min-h-40 rounded-2xl border border-ink/10 bg-white p-6 shadow-sm ${className}`}
     />
   );
 }
@@ -150,7 +157,8 @@ export default function Home() {
       <section className="bg-sand text-ink">
         <div className={`${container} py-16 text-center sm:py-20`}>
           <span aria-hidden className="mx-auto mb-10 block h-1 w-16 rounded-full bg-sun" />
-          <blockquote className="mx-auto max-w-4xl font-serif text-2xl leading-snug italic sm:text-4xl">
+          {/* Balanced wrap keeps this to two even lines on desktop, ending on "live" */}
+          <blockquote className="mx-auto max-w-6xl font-serif text-2xl leading-snug text-balance italic sm:text-3xl lg:text-4xl">
             “We might not be living our most beautiful days, but there’s always
             something beautiful in every day we live”
           </blockquote>
@@ -171,16 +179,36 @@ export default function Home() {
                 <h3 className="text-sm font-bold tracking-[0.2em] text-ink/70">
                   THE LATEST
                 </h3>
-                {/* Spot for Radwa or TJ to add the newest update. */}
-                <Box />
+                {/* Newest entry in src/data/teamTamer.ts (updates[0]) */}
+                <div className="min-h-40 rounded-2xl border border-ink/10 bg-white p-6 shadow-sm">
+                  {latestUpdate ? (
+                    <UpdateEntry update={latestUpdate} />
+                  ) : (
+                    <p className="text-muted italic">
+                      The newest update from Radwa &amp; TJ will appear here.
+                    </p>
+                  )}
+                </div>
               </div>
               <div className="flex flex-col gap-4">
                 <h3 className="text-sm font-bold tracking-[0.2em] text-ink/70">
                   UP UNTIL NOW
                 </h3>
-                {/* Previous updates in chronological order, each led by its date. */}
-                <div className="max-h-96 overflow-y-auto rounded-2xl">
-                  <Box className="min-h-56" />
+                {/* Every older update; when a new one is added it moves here automatically */}
+                <div className="max-h-96 min-h-56 overflow-y-auto rounded-2xl border border-ink/10 bg-white p-6 shadow-sm">
+                  {previousUpdates.length > 0 ? (
+                    <ol className="flex flex-col divide-y divide-ink/10">
+                      {previousUpdates.map((update, index) => (
+                        <li key={`${update.date}-${index}`} className="py-4 first:pt-0 last:pb-0">
+                          <UpdateEntry update={update} />
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p className="text-muted italic">
+                      Earlier updates will roll in here.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -220,13 +248,15 @@ export default function Home() {
             treatment.  It is also how we can keep you all posted on the family
             and Tamer’s progress, as well as any events hosted in support of
             this journey. We are grateful for any help given, be it prayers,
-            errands, meals, or financial assistance.  Good jokes that make us
-            laugh are always a bonus 😊
+            errands, meals, or financial assistance.
+            <span className="mt-2 block">
+              Good jokes that make us laugh are always a bonus 😊
+            </span>
           </p>
         </div>
       </section>
 
-      {/* ---------- Join + Wish list ---------- */}
+      {/* ---------- Join + Messages ---------- */}
       <section className="py-20 sm:py-28">
         <div className={`${container} grid items-start gap-8 lg:grid-cols-2`}>
           <div id="join" className={card}>
@@ -257,73 +287,6 @@ export default function Home() {
             </div>
           </div>
 
-          <div id="wish-list" className={`${card} bg-gradient-to-br from-white to-sand/50`}>
-            <Heading className="text-2xl sm:text-3xl">WISH LIST</Heading>
-            <Accent />
-            <p className="mt-6 font-bold text-ink/80">
-              click on the wish you want to grant; enter your name, cell and
-              logistical messaging
-            </p>
-            <div className="mt-8 flex flex-col gap-4">
-              {/* Each wish opens a pop-up box (native HTML popover, no JavaScript). */}
-              <button
-                type="button"
-                popoverTarget="wish-1"
-                className="group flex cursor-pointer items-center gap-4 rounded-2xl border border-ink/10 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-sun hover:shadow-md"
-              >
-                <span
-                  aria-hidden
-                  className="size-3 shrink-0 rounded-full bg-sun"
-                />
-                <span className="leading-relaxed">
-                  Dinner for the kids at 6pm on Friday October 16<sup>th</sup>.
-                </span>
-                <span
-                  aria-hidden
-                  className="ml-auto text-2xl text-ink/30 transition group-hover:translate-x-1 group-hover:text-ink"
-                >
-                  →
-                </span>
-              </button>
-            </div>
-          </div>
-
-          <div
-            id="wish-1"
-            popover="auto"
-            className="m-auto w-[min(34rem,calc(100%-2rem))] rounded-3xl bg-white p-7 shadow-2xl backdrop:bg-ink/50 backdrop:backdrop-blur-sm sm:p-10"
-          >
-            <div className="flex flex-col gap-5">
-              <p className="font-serif text-xl font-bold leading-snug">
-                Dinner for the kids at 6pm on Friday October 16<sup>th</sup>.
-              </p>
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field id="wish-1-name" label="Name" />
-                <Field id="wish-1-email" label="Email" type="email" />
-                <div className="sm:col-span-2">
-                  <Field id="wish-1-cell" label="Cell" type="tel" />
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="wish-1-message"
-                  className="text-sm font-bold tracking-wider text-ink/80"
-                >
-                  SHORT MESSAGE:
-                </label>
-                <textarea id="wish-1-message" rows={3} className={inputClass} />
-              </div>
-              <button type="button" className={`self-end ${buttonClass}`}>
-                SEND
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- Messages + Financial ---------- */}
-      <section className="bg-sand/60 py-20 sm:py-28">
-        <div className={`${container} grid items-start gap-8 lg:grid-cols-2`}>
           <div id="messages" className={`${card} flex flex-col`}>
             <Heading className="text-2xl sm:text-3xl">
               MESSAGES TO TAMER &amp; THE FAM
@@ -341,6 +304,80 @@ export default function Home() {
               SEND
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* ---------- Wish list + Donations ---------- */}
+      <section className="bg-sand/60 py-20 sm:py-28">
+        <div className={`${container} grid items-start gap-8 lg:grid-cols-2`}>
+          <div id="wish-list" className={`${card} bg-gradient-to-br from-white to-sand/50`}>
+            <Heading className="text-2xl sm:text-3xl">WISH LIST</Heading>
+            <Accent />
+            <p className="mt-6 font-bold text-ink/80">
+              click on the wish you want to grant; enter your name, cell and
+              logistical messaging
+            </p>
+            <div className="mt-8 flex flex-col gap-4">
+              {/* Wishes come from src/data/teamTamer.ts; each opens its own pop-up (native popover, no JavaScript) */}
+              {wishes.map((wish) => (
+                <button
+                  key={wish.id}
+                  type="button"
+                  popoverTarget={wish.id}
+                  className="group flex cursor-pointer items-center gap-4 rounded-2xl border border-ink/10 bg-white p-5 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-sun hover:shadow-md"
+                >
+                  <span
+                    aria-hidden
+                    className="size-3 shrink-0 rounded-full bg-sun"
+                  />
+                  <span className="leading-relaxed">{wish.text}</span>
+                  <span
+                    aria-hidden
+                    className="ml-auto text-2xl text-ink/30 transition group-hover:translate-x-1 group-hover:text-ink"
+                  >
+                    →
+                  </span>
+                </button>
+              ))}
+              {wishes.length === 0 && (
+                <p className="text-muted italic">No open wishes right now. Check back soon!</p>
+              )}
+            </div>
+          </div>
+
+          {wishes.map((wish) => (
+            <div
+              key={wish.id}
+              id={wish.id}
+              popover="auto"
+              className="m-auto w-[min(34rem,calc(100%-2rem))] rounded-3xl bg-white p-7 shadow-2xl backdrop:bg-ink/50 backdrop:backdrop-blur-sm sm:p-10"
+            >
+              <div className="flex flex-col gap-5">
+                <p className="font-serif text-xl font-bold leading-snug">
+                  {wish.text}
+                </p>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <Field id={`${wish.id}-name`} label="Name" />
+                  <Field id={`${wish.id}-email`} label="Email" type="email" />
+                  <div className="sm:col-span-2">
+                    <Field id={`${wish.id}-cell`} label="Cell" type="tel" />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label
+                    htmlFor={`${wish.id}-message`}
+                    className="text-sm font-bold tracking-wider text-ink/80"
+                  >
+                    SHORT MESSAGE:
+                  </label>
+                  <textarea id={`${wish.id}-message`} rows={3} className={inputClass} />
+                </div>
+                <button type="button" className={`self-end ${buttonClass}`}>
+                  SEND
+                </button>
+              </div>
+            </div>
+          ))}
 
           <div id="donate" className={`${card} flex flex-col`}>
             <Heading className="text-2xl sm:text-3xl">
@@ -378,6 +415,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------- Donors ---------- */}
+      <section className="py-20 sm:py-24">
+        <div className={container}>
+          <div className={`${card} mx-auto max-w-3xl text-center`}>
+            <Heading className="text-2xl sm:text-3xl">THANK YOU TO OUR DONORS</Heading>
+            <Accent center />
+            {donors.length > 0 ? (
+              // Slow vertical roll; the list is doubled so the loop is seamless. Hover pauses it.
+              <div className="donor-roll relative mt-8 h-72 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]">
+                <ul className="donor-roll-track flex flex-col gap-3">
+                  {[...donors, ...donors].map((donor, index) => (
+                    <li
+                      key={index}
+                      aria-hidden={index >= donors.length}
+                      className="font-serif text-xl"
+                    >
+                      {donor.anonymous || !donor.name ? "Anonymous" : donor.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="mt-8 text-muted italic">
+                Every gift helps. Donors will be thanked here.
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* ---------- Thank you ---------- */}
       <footer className="border-t border-sun/40 bg-sand text-ink">
         <div
@@ -390,10 +457,12 @@ export default function Home() {
             Thank you for all the prayers, love, laughs and help
           </p>
           <span aria-hidden className="my-8 block h-px w-24 bg-sun" />
-          <p className="max-w-3xl font-serif text-xl italic text-gold sm:text-2xl">
+          <p className="font-serif text-xl italic text-gold sm:text-2xl lg:whitespace-nowrap lg:text-[1.4rem] xl:text-2xl">
             “ALONE WE CAN DO SO LITTLE, TOGETHER WE CAN DO SO MUCH”
           </p>
-          <p className="text-muted">Helen Keller</p>
+          <p className="mt-2 font-serif text-lg text-ink/80 italic sm:text-xl">
+            — Helen Keller
+          </p>
         </div>
       </footer>
     </main>

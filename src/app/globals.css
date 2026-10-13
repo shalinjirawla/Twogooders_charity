@@ -22,3 +22,31 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
 }
+
+/* Donor box: slow, seamless vertical roll (the list is rendered twice) */
+.donor-roll-track {
+  animation: donor-roll 40s linear infinite;
+}
+
+.donor-roll:hover .donor-roll-track {
+  animation-play-state: paused;
+}
+
+@keyframes donor-roll {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    /* Half the doubled list plus half a gap lands exactly on the second copy */
+    transform: translateY(calc(-50% - 0.375rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donor-roll-track {
+    animation: none;
+  }
+  .donor-roll {
+    overflow-y: auto;
+  }
+}

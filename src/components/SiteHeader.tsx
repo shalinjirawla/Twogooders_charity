@@ -1,15 +1,14 @@
 import Image from "next/image";
+import { KnockOutPoster } from "@/components/KnockOutPoster";
 
 const container = "mx-auto w-full max-w-7xl px-5 sm:px-8";
 
 const links = [
   { href: "#updates", label: "Updates" },
   { href: "#join", label: "Join Team Tamer" },
-  { href: "#wish-list", label: "Wish List" },
   { href: "#messages", label: "Messages" },
+  { href: "#wish-list", label: "Wish List" },
 ];
-
-const amounts = ["$25", "$50", "$100", "$250"];
 
 // Lucide-style line icons, inlined to keep the site fully static.
 const icons = {
@@ -107,7 +106,7 @@ export function SiteHeader() {
         >
           <Icon name="heart" className="hidden size-4 text-sun sm:block" />
           <span className="font-bold">
-            Help the Tamer family through every step of treatment
+            Help Tamer &amp; his family through every step of treatment
           </span>
           <a
             href="#donate"
@@ -216,85 +215,10 @@ export function SiteHeader() {
               donations help his family focus on what matters most: being
               together.
             </p>
-            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <a
-                href="#donate"
-                className="flex items-center justify-center gap-2 rounded-full bg-ink px-9 py-4 font-bold tracking-wide text-cream shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
-              >
-                <Icon name="heart" className="size-5 text-sun" />
-                Donate Now
-              </a>
-              <a
-                href="#join"
-                className="flex items-center justify-center rounded-full border-2 border-ink px-9 py-4 font-bold tracking-wide text-ink transition hover:bg-ink hover:text-cream"
-              >
-                Join Team Tamer
-              </a>
-            </div>
-            <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-base font-bold text-ink/75 lg:justify-start">
-              {["One-time or monthly", "Every prayer counts", "Help in any way"].map(
-                (t) => (
-                  <li key={t} className="flex items-center gap-1.5">
-                    <Icon name="check" className="size-4 text-ink" />
-                    {t}
-                  </li>
-                ),
-              )}
-            </ul>
           </div>
 
-          {/* Donation card */}
-          <div className="mx-auto w-full max-w-md rounded-3xl bg-white p-7 shadow-[0_30px_60px_-20px_rgba(43,43,43,0.35)] ring-1 ring-ink/5 sm:p-9">
-            <div className="flex items-center gap-3">
-              <span className="grid size-11 place-items-center rounded-full bg-sun/30 text-gold">
-                <Icon name="heart" className="size-6" />
-              </span>
-              <div>
-                <p className="font-serif text-2xl font-bold">
-                  Support Tamer’s Fight
-                </p>
-                <p className="text-sm text-muted">Choose an amount to give</p>
-              </div>
-            </div>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {amounts.map((a) => (
-                <a
-                  key={a}
-                  href="#donate"
-                  className="rounded-xl border-2 border-ink/10 py-3 text-center text-xl font-bold transition hover:border-gold hover:bg-sun/15"
-                >
-                  {a}
-                </a>
-              ))}
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 rounded-full bg-sand p-1 text-sm font-bold">
-              <a
-                href="#donate"
-                className="rounded-full py-2 text-center text-muted transition hover:text-ink"
-              >
-                One time
-              </a>
-              <a
-                href="#donate"
-                className="rounded-full bg-white py-2 text-center shadow-sm"
-              >
-                Monthly
-              </a>
-            </div>
-
-            <a
-              href="#donate"
-              className="mt-6 flex items-center justify-center gap-2 rounded-full bg-ink py-4 font-bold tracking-wide text-cream shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl"
-            >
-              <Icon name="heart" className="size-5 text-sun" />
-              Donate Now
-            </a>
-            <p className="mt-4 text-center text-sm text-muted italic">
-              small monthly donations are extremely helpful!
-            </p>
-          </div>
+          {/* Knock out cancer poster (keeps the money ask low-key). */}
+          <KnockOutPoster />
         </div>
       </section>
 
