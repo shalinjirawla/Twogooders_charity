@@ -1,0 +1,10 @@
+:root {
+  --ease-out: cubic-bezier(0.22, 0.9, 0.31, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Used by AnimatedSection (inline animation name, so it must be global) */
+@keyframes slideUpFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
