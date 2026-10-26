@@ -1,3 +1,5 @@
+import PreviewShell from "../_preview-shared/PreviewShell";
+
 export const metadata = {
   title: "Fundraising Program preview | Two Gooders",
   description: "Preview of the redesigned Two Gooders Fundraising Program page.",
@@ -5,5 +7,5 @@ export const metadata = {
 };
 
 export default function FundraisingPreviewLayout({ children }) {
-  return children;
+  return <PreviewShell>{children}</PreviewShell>;
 }
