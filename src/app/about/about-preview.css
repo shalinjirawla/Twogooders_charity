@@ -1,0 +1,835 @@
+.ab-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* ===== HERO (centred variant of the shared premium hero) =====
+   Doubled class: beats the shared .ab-hero rule whichever stylesheet loads last */
+.ab-storyHero.ab-storyHero {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  padding-bottom: clamp(40px, 5vw, 72px);
+}
+
+.ab-storyHeroCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1100px;
+}
+
+.ab-storyTitle.ab-storyTitle {
+  font-size: var(--text-5xl);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+/* Wide enough that the intro sits on two lines on desktop screens */
+.ab-storyLead.ab-storyLead {
+  max-width: 98ch;
+  font-size: var(--text-lg);
+  text-wrap: balance;
+}
+
+.ab-storyActions.ab-storyActions {
+  justify-content: center;
+}
+
+/* ===== FOUNDER SECTION ===== */
+
+.ab-container {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.ab-founderCard {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.ab-founderPhoto {
+  width: 330px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+
+.ab-founderContent {
+  flex: 1;
+}
+
+.ab-founderContent h3 {
+  margin: 0 0 6px 0;
+  font-size: var(--text-xl);
+  color: rgba(201, 164, 108);
+}
+
+.ab-foundername {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: var(--text-2xl);
+}
+
+.ab-founderTitle {
+  margin: 0 0 20px 0;
+  font-size: var(--text-lg);
+  line-height: 1.4;
+
+}
+
+.ab-founderBio p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+  font-size: var(--text-lg);
+}
+
+.ab-quote {
+  margin-top: 20px;
+  padding: 16px;
+  background: transparent;
+  font-style: italic;
+  border-left: 3px solid rgba(201, 164, 108, 0.5);
+}
+
+.ab-signature {
+  display: block;
+  width: 80px;
+  height: auto;
+  margin-top: 8px;
+  object-fit: contain;
+}
+
+/* ===== FOUNDING TEAM SECTION ===== */
+.ab-foundingGridBlock {
+  margin-top: 32px;
+}
+
+.ab-foundingIntro {
+  max-width: 1200px;
+  width: 100%;
+  padding: 16px;
+  font-size: var(--text-lg);
+  text-align: left;
+  margin: 0 auto;
+}
+
+.ab-foundingIntro p {
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.ab-foundingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8px 20px 0;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+
+/* Equal-height cards while every bio is collapsed (the buttons line up along the bottom).
+   Once a bio is open, rows fall back to natural heights so the neighbours don't stretch
+   into empty space beside it. */
+.ab-foundingGrid:has(.ab-bioFull:not([hidden])),
+.ab-internGrid:has(.ab-bioFull:not([hidden])) {
+  align-items: start;
+}
+
+.ab-teamCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid rgba(47, 79, 79, 0.08);
+  box-shadow: 0 1px 2px rgba(47, 79, 79, 0.04), 0 8px 24px rgba(47, 79, 79, 0.06);
+  padding: 28px 24px 32px;
+  border-radius: 16px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.ab-teamCard:hover {
+  box-shadow: 0 2px 4px rgba(47, 79, 79, 0.05), 0 16px 36px rgba(47, 79, 79, 0.10);
+  transform: translateY(-2px);
+}
+
+.ab-teamCard .ab-profileRole {
+  color: #C9A46C;
+}
+
+.ab-teamCard .ab-quoteBlock {
+  border-left: 3px solid rgb(95, 128, 128);
+  text-align: left;
+}
+
+.ab-viewBioBtnLight {
+  font-family: var(--sans);
+  margin-top: auto;
+  margin-bottom: 0;
+  background: #2F4F4F;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ab-viewBioBtnLight:focus-visible,
+.ab-viewBioBtn:focus-visible {
+  outline: 2px solid #C9A46C;
+  outline-offset: 3px;
+}
+
+/* Collapsed bio: the opening lines, fading out, so a card without a "most good"
+   blurb is not an empty box above its button. "Meet …" expands to bioFull. */
+.ab-bioPreview {
+  width: 100%;
+  text-align: left;
+  max-height: calc(var(--text-lg) * 1.6 * 6);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  margin-bottom: 24px;
+}
+
+.ab-bioFull {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.ab-viewBioBtnLight:hover {
+  background: #243d3d;
+  transform: translateY(-1px);
+}
+
+/* ===== TEAM CARDS ===== */
+.ab-teamCardLarge {
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 24px;
+  align-items: start;
+  padding: 32px 20px;
+  margin: 0 auto;
+}
+
+.ab-teamCardLarge h4 {
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  margin-bottom: 8px;
+}
+
+.ab-cardRole {
+  font-size: var(--text-lg);
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.ab-teamCardLarge p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+  font-size: var(--text-lg);
+}
+
+.ab-teamLargePhoto {
+  width: 330px;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ===== INTERN TEAM SECTION ===== */
+.ab-internSection {
+  background: rgb(95, 128, 128);
+  padding: 48px 20px;
+  color: #fff;
+}
+
+.ab-internSection h2,
+.ab-internSection h3,
+.ab-internSection h5,
+.ab-internSection p,
+.ab-internSection span,
+.ab-internSection li {
+  color: #fff !important;
+}
+
+.ab-internSection .ab-profileRole {
+  color: #d8f9f8 !important;
+}
+
+.ab-sectionSubtitle {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.ab-sectionIntro {
+  max-width: 1000px;
+  margin: 0 auto 48px;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.ab-techTeamDetails {
+  max-width: 980px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 16px;
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  text-align: left;
+  color: #515151;
+}
+
+.ab-techTeamList {
+  max-width: 1280px;
+  box-sizing: border-box;
+  padding: 16px;
+  margin: 0 auto 48px;
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  text-align: left;
+  color: #515151;
+}
+
+.ab-marqueeSection {
+  overflow: hidden;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.ab-marqueeContent {
+  display: flex;
+  width: max-content;
+  animation: ab-marquee 40s linear infinite;
+}
+
+.ab-marqueeContent:hover {
+  animation-play-state: paused;
+}
+
+.ab-marqueeItem {
+  display: flex;
+  align-items: center;
+  padding: 8px 24px;
+  margin: 0 12px;
+  border: 1px solid rgba(201, 164, 108, 0.4);
+  background: rgba(201, 164, 108, 0.08);
+  border-radius: 6px;
+}
+
+.ab-memberName {
+  color: #c9a46c;
+  margin-right: 8px;
+  font-weight: 700;
+}
+
+.ab-memberCause {
+  font-style: italic;
+  color: #515151;
+}
+
+@keyframes ab-marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ab-internGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.ab-internCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 28px 24px 32px;
+  border-radius: 16px;
+}
+
+.ab-viewBioBtn {
+  font-family: var(--sans);
+  margin-top: auto;
+  /* Pushes button to bottom */
+  margin-bottom: 0;
+  background: #fff;
+  color: #2F4F4F;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ab-viewBioBtn:hover {
+  background: #F3ECE0;
+  transform: translateY(-1px);
+}
+
+.ab-profileRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.ab-profileImage {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  flex-shrink: 0;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  background: #F3ECE0;
+}
+
+.ab-profileContent {
+  flex: 1;
+}
+
+.ab-profileName {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.ab-profileRole {
+  font-size: var(--text-sm);
+  margin: 0 0 20px;
+  color: #d8f9f8;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ab-profileText {
+  font-size: var(--text-base);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.ab-quoteBlock {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-left: 16px;
+  border-left: 3px solid #fff;
+}
+
+.ab-quoteIcon {
+  font-size: 30px;
+  line-height: 1;
+  margin-bottom: -10px;
+}
+
+.ab-quoteText {
+  font-size: var(--text-lg);
+  font-style: italic;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.ab-quoteAuthor {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.ab-whereHeading {
+  margin-bottom: 12px;
+  font-size: var(--text-lg);
+  line-height: 1.2;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ab-whereText {
+  margin: 0 0 32px 0;
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.ab-sectionDivider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 48px auto;
+}
+
+.ab-seanWrapper {
+  max-width: 1300px;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 0 auto;
+}
+
+.ab-seanContent {
+  flex: 1;
+}
+
+.ab-seanImage img {
+  height: 350px;
+  flex-shrink: 0;
+  object-fit: fill;
+  object-position: center top;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .ab-foundingGrid,
+  .ab-internGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  .ab-founderCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ab-founderPhoto {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .ab-teamCardLarge {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .ab-teamCardLarge> :first-child {
+    order: 2;
+  }
+
+  .ab-teamCardLarge> :last-child {
+    order: 1;
+  }
+
+  .ab-teamLargePhoto {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .ab-profileRow,
+  .ab-seanWrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ab-seanImage img {
+    height: 200px;
+  }
+
+  .ab-profileImage {
+    max-width: 240px;
+  }
+
+  .ab-internGrid,
+  .ab-foundingGrid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .ab-internCard,
+  .ab-teamCard {
+    padding: 20px;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  .ab-quoteBlock {
+    text-align: left;
+  }
+
+  .ab-whereHeading,
+  .ab-whereText {
+    text-align: center;
+  }
+
+  .ab-internCard,
+  .ab-teamCard {
+    min-height: auto !important;
+  }
+
+  
+
+  .ab-foundingIntro {
+    padding: 16px 8px;
+  }
+
+}
+
+@media (max-width: 780px) {
+  
+
+  
+  .ab-foundingIntro p,
+  .ab-founderBio p,
+  .ab-techTeamDetails,
+  .ab-techTeamList,
+  .ab-profileText,
+  .ab-whereText {
+    font-size: var(--mobile-body) !important;
+  }
+
+  
+  .ab-sectionSubtitle,
+  .ab-founderContent h3,
+  .ab-profileName,
+  .ab-foundername {
+    font-size: var(--mobile-heading) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  .ab-sectionSubtitle,
+  .ab-profileName {
+    font-size: var(--mobile-heading) !important;
+  }
+
+  .ab-profileRow,
+  .ab-seanWrapper {
+    gap: 24px;
+  }
+
+  .ab-seanImage img {
+    height: 180px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab-teamCard,
+  .ab-teamCard:hover,
+  .ab-viewBioBtn:hover,
+  .ab-viewBioBtnLight:hover {
+    transform: none;
+    transition: none;
+  }
+
+  .ab-marqueeContent {
+    animation: none;
+  }
+}
+
+
+/* ===== Premium restyle (shared tokens come from styles/premium.module.css) ===== */
+.ab-teamSection {
+  scroll-margin-top: var(--header-offset);
+  padding-top: clamp(24px, 3vw, 48px);
+}
+
+.ab-founderCard {
+  max-width: 1200px;
+  gap: clamp(28px, 4vw, 56px);
+  padding: clamp(24px, 3vw, 44px);
+  border-radius: var(--radius);
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(47, 79, 79, 0.04), 0 10px 30px rgba(47, 79, 79, 0.05);
+}
+
+
+.ab-founderPhoto {
+  position: sticky;
+  top: calc(var(--header-offset) + 24px);
+  border-radius: 16px;
+  box-shadow: 0 30px 60px -34px rgba(47, 79, 79, 0.45);
+}
+
+.ab-founderContent h3 {
+  font-size: var(--text-3xl);
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.ab-foundername {
+  color: var(--teal);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+
+.ab-founderTitle {
+  font-family: var(--sans);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ab-founderBio p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.ab-founderBio .ab-quote {
+  font-family: var(--serif);
+  font-size: var(--text-xl);
+  line-height: 1.6;
+  color: var(--teal);
+  background: var(--sand);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+  padding: 22px 26px;
+}
+
+.ab-foundingGridBlock {
+  margin-top: clamp(48px, 6vw, 88px);
+}
+
+.ab-foundingIntro {
+  max-width: 820px;
+  text-align: center;
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.ab-foundingIntro .ab-sectionLead {
+  line-height: 1.75;
+}
+
+.ab-teamCard {
+  border-color: var(--line);
+}
+
+.ab-teamCard .ab-profileRole {
+  color: var(--gold);
+}
+
+.ab-profileName {
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.ab-internSection .ab-profileName {
+  color: #fff;
+}
+
+.ab-profileText {
+  color: var(--muted);
+}
+
+.ab-techSection {
+  text-align: center;
+  max-width: 1320px;
+  margin: clamp(48px, 6vw, 88px) auto 0;
+  padding: 0 clamp(20px, 4vw, 48px);
+  box-sizing: border-box;
+}
+
+.ab-techSection img {
+  border-radius: var(--radius);
+}
+
+.ab-techTeamDetails,
+.ab-techTeamList {
+  color: var(--muted);
+}
+
+.ab-internSection {
+  background: var(--teal);
+  padding: clamp(48px, 6vw, 88px) 20px;
+  margin-top: clamp(24px, 3vw, 48px);
+  text-align: center;
+}
+
+.ab-internSection .ab-sectionSubtitle {
+  font-size: var(--text-4xl);
+  font-weight: 600;
+}
+
+.ab-internSection .ab-internCard {
+  text-align: center;
+}
+
+/* The eyebrow stays gold on the teal band */
+.ab-internSection .ab-internEyebrow {
+  color: var(--gold) !important;
+}
+
+.ab-internCard:hover {
+  border-color: rgba(201, 164, 108, 0.55);
+}
+
+@media (max-width: 900px) {
+  .ab-founderPhoto {
+    position: static;
+  }
+
+  .ab-founderCard {
+    text-align: center;
+  }
+}
